@@ -1,0 +1,14 @@
+#!perl
+use strict;
+use warnings;
+use App::dayonetools;
+
+my $app = App::dayonetools->new(@ARGV);
+$app->run();
+__END__
+
+=head1 DESCRIPTION
+
+See L<App::dayonetools>.
+
+=cut

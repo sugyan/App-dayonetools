@@ -1,0 +1,13 @@
+#!/bin/sh
+if git rev-parse; then
+    HOOKFILE=$(git rev-parse --git-dir)/hooks/commit-msg
+    cat <<'EOF' > "$HOOKFILE"
+#!/bin/sh
+if which dayone > /dev/null; then
+    DIRNAME=$(basename "$(git rev-parse --show-toplevel)")
+    BRANCH=$(git branch | grep '^*' | sed -e 's/* //')
+    echo git commit to "$DIRNAME/$BRANCH": $(grep -v ^# $1) | dayone
+fi
+EOF
+    chmod u+x "$HOOKFILE"
+fi
